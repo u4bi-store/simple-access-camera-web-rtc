@@ -27,9 +27,18 @@
         <canvas id="capture"></canvas>
 
         
+        <!-- 비디오 스트림 -->
+        <p>
+          <h3>비디오 스트림</h3>
+        </p>
+        <canvas id="feed"></canvas>
+
+        
         <script>
 
-            var video;
+            var video,
+                feed,
+                feedContext;
             
             /*  UserMedia 가져오기
                 클라이언트의 브라우저에서 사용 가능한지 판별 */
@@ -81,6 +90,11 @@
                 video.play();
 
 
+                feed = document.getElementById('feed');
+                feedContext = feed.getContext('2d');
+
+
+                render();
             };
 
             /*  비디오 캡쳐하기
@@ -93,6 +107,17 @@
                 // 컨텍스트를 가져왔으면 비디오 이미지를 그린다.
 
                 context.drawImage(video, 0, 0, capture.width, capture.height);
+
+            } 
+
+            /*  비디오 스트림하기 
+                https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+            */
+            function render(){ 
+                requestAnimationFrame(render);
+                // console.log('render');
+
+                feedContext.drawImage(video, 0, 0, feed.width, feed.height);
 
             }
             
