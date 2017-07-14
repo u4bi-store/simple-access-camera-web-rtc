@@ -9,8 +9,14 @@
     </head>
     <body>
 
+        <video id="cam"></video>
+
+
         <script>
 
+            var video;
+
+            
             /*  UserMedia 가져오기
                 클라이언트의 브라우저에서 사용 가능한지 판별 */
             navigator.getMedia = ( 
@@ -33,7 +39,15 @@
 
 
             function success(e){
-                console.log('success ', e);
+                // console.log('success ', e);
+
+                /*  비디오 스트림하기
+                    비디오 DOM의 소스를 스트림으로 설정
+                    */
+                video = document.getElementById ('cam');
+                video.src = window.URL.createObjectURL(e);
+                video.play();
+
 
             };
             
