@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>web rtc</title>
+        
+        <style>
+        </style>
+    </head>
+    <body>
+
+        <script>
+
+            /*  UserMedia 가져오기
+                클라이언트의 브라우저에서 사용 가능한지 판별 */
+            navigator.getMedia = ( 
+                navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia
+            );
+
+            if(navigator.getMedia) console.log('지원되는 브라우저');
+            
+        </script>
+    </body>
+</html>
