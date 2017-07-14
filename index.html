@@ -5,17 +5,31 @@
         <title>web rtc</title>
         
         <style>
+            video{
+              width : 400px;
+              height: 300px;
+            }
+
+            canvas{
+              border: 1px solid red;
+            }
         </style>
     </head>
     <body>
 
         <video id="cam"></video>
+        
+        
+        <!-- 비디오 캡쳐 -->
+        <p>
+          <button onclick="photo()">비디오 캡쳐</button>
+        </p>
+        <canvas id="capture"></canvas>
 
-
+        
         <script>
 
             var video;
-
             
             /*  UserMedia 가져오기
                 클라이언트의 브라우저에서 사용 가능한지 판별 */
@@ -68,6 +82,19 @@
 
 
             };
+
+            /*  비디오 캡쳐하기
+                캔버스 DOM에 비디오를 그려준다 */
+            function photo(){
+                var 
+                    capture = document.getElementById('capture'),
+                    context = capture.getContext('2d');
+
+                // 컨텍스트를 가져왔으면 비디오 이미지를 그린다.
+
+                context.drawImage(video, 0, 0, capture.width, capture.height);
+
+            }
             
         </script>
     </body>
