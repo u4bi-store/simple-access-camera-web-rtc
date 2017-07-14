@@ -33,12 +33,21 @@
         </p>
         <canvas id="feed"></canvas>
 
+
+        <!-- 스트리밍 되는 비디오에 효과주기 -->
+        <p>
+            <h3>비디오 효과</h3>
+        </p>
+        <canvas id="effect"></canvas>
+
         
         <script>
 
             var video,
                 feed,
-                feedContext;
+                feedContext,
+                effect,
+                effectContext;
             
             /*  UserMedia 가져오기
                 클라이언트의 브라우저에서 사용 가능한지 판별 */
@@ -94,6 +103,10 @@
                 feedContext = feed.getContext('2d');
 
 
+                effect = document.getElementById('effect');
+                effectContext = effect.getContext('2d');
+
+
                 render();
             };
 
@@ -118,6 +131,39 @@
                 // console.log('render');
 
                 feedContext.drawImage(video, 0, 0, feed.width, feed.height);
+                
+                renderEffect();
+
+            }
+
+            /* 스트리밍 되는 비디오에 효과주기
+            */
+            function renderEffect(){
+                var 
+                    imageData = feedContext.getImageData(0, 0, effect.width, effect.height);
+                
+                imageData.data = add(0, 0, 255); // blue
+                
+                effectContext.putImageData(imageData, 0, 0);
+                // feedContext.putImageData(imageData, 0, 0);
+
+
+                function add(r, g, b){
+                    /*  RGB CODE
+                        https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Colors/Color_picker_tool
+                    */
+
+                    var 
+                        data = imageData.data;
+
+                    for(var i=0, l=data.length; i < l; i += 4){
+                        
+                        data[i]     += r;  // R
+                        data[i + 1] += g;  // G
+                        data[i + 2] += b;  // B
+                    }
+                    return data;                    
+                }
 
             }
             
