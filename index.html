@@ -30,7 +30,25 @@
             /*  메서드 호출하여 콜백 받기
                 getUserMedia (스트림 옵션, 연결 성공, 연결 오류) */
             navigator.getMedia({
-                video : true,
+                video : {
+
+                    /*  getUserMedia 비디오 옵션 알아보기
+                        https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia 
+                    */
+                    width: 800 , // 카메라 해상도 설정 
+                    height: 600 ,
+                    /* 최소 해상도 설정 */
+                    // width : {
+                    //     min : 1800
+                    // },
+                    frameRate: { // 프레임 속도
+                        ideal : 10,
+                        max : 15
+                    }
+                    /* 전면 및 후면 카메라 */
+                    // , facingMode: 'user'
+                    // , facingMode: 'environment'
+                },
                 audio : true
             }, success, function(e){
                 console.log('err ', e);
