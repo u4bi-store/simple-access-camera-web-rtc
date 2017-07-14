@@ -20,6 +20,22 @@
             );
 
             if(navigator.getMedia) console.log('지원되는 브라우저');
+
+            /*  메서드 호출하여 콜백 받기
+                getUserMedia (스트림 옵션, 연결 성공, 연결 오류) */
+            navigator.getMedia({
+                video : true,
+                audio : true
+            }, success, function(e){
+                console.log('err ', e);
+
+            });
+
+
+            function success(e){
+                console.log('success ', e);
+
+            };
             
         </script>
     </body>
